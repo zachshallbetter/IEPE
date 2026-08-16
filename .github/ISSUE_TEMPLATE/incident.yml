@@ -1,0 +1,32 @@
+name: IEPE Incident
+description: Restore integrity and preserve operational learning.
+title: "[Incident] "
+body:
+  - type: textarea
+    id: impact
+    attributes: { label: Impact and current state }
+    validations: { required: true }
+  - type: textarea
+    id: authority
+    attributes: { label: Response authority and protected actions }
+    validations: { required: true }
+  - type: textarea
+    id: evidence
+    attributes: { label: Observed evidence and timeline }
+    validations: { required: true }
+  - type: textarea
+    id: containment
+    attributes: { label: Containment and recovery }
+    validations: { required: true }
+  - type: textarea
+    id: cause
+    attributes: { label: Cause status and uncertainty }
+    validations: { required: true }
+  - type: textarea
+    id: verification
+    attributes: { label: Recovery verification }
+    validations: { required: true }
+  - type: textarea
+    id: followup
+    attributes: { label: Follow-up issues and institutional learning }
+    validations: { required: true }

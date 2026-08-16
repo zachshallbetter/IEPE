@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../schemas/migration-record.schema.json",
+  "id": "migration.new-24",
+  "source": { "provider": "example-tracker", "itemId": "NEW-24", "status": "Open", "url": null },
+  "classification": "new",
+  "disposition": "require-full-contract",
+  "targetStatus": "Backlog",
+  "statusRationale": "The item was created after the adoption boundary and cannot become Ready without a complete IEPE issue contract.",
+  "intentRefs": ["intent.participant-guide"],
+  "relationshipRefs": ["LEGACY-18"],
+  "provenance": "complete",
+  "evidenceGaps": ["IEPE issue contract not yet attached"],
+  "decision": "accepted",
+  "notes": "Native dependency on LEGACY-18 must remain intact."
+}

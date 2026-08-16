@@ -1,0 +1,25 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-010.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-010",
+  "candidateId": "epistemic-stress-testing.1",
+  "artifactRefs": ["docs/EPISTEMIC_STRESS_TESTING.md", "schemas/perturbation.schema.json", "schemas/world-card.schema.json", "schemas/robustness-profile.schema.json", "schemas/unknown-variable-ledger.schema.json", "examples/exhibition-guide/stress/trial-report.md"],
+  "intentRefs": ["ROADMAP.md", "work/IEPE-CORE-010.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": {"type": "local synthetic blind counterfactual trial", "worldCards": 2},
+  "inputs": ["frozen editorial candidate", "format-loss World Card", "dependency-loss World Card"],
+  "provenance": ["IEPE-CORE-010 protocol cycle"],
+  "evaluations": [
+    {"dimension": "contract conformance", "result": "four new record types validate", "evaluator": "tools/validate.py", "evidenceRefs": ["fixtures/conformance.json"]},
+    {"dimension": "blind perturbation procedure", "result": "candidate freeze precedes two World Card reveals", "evaluator": "synthetic independent review", "evidenceRefs": ["examples/exhibition-guide/stress/trial-report.md"]},
+    {"dimension": "epistemic honesty", "result": "human comprehension remains explicitly unvalidated", "evaluator": "protocol review", "evidenceRefs": ["examples/exhibition-guide/stress/unknown-variable-ledger.json"]}
+  ],
+  "baselineComparison": {"before": "known contracts tested only under declared conditions", "after": "frozen candidates can be tested against sealed changed conditions with bounded claims"},
+  "cost": null,
+  "tradeoffs": ["synthetic cards improve assumption discovery but do not replace field observation"],
+  "limitations": ["initial trials are synthetic", "steward independence is procedural rather than organizational"],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run python3 tools/validate.py and inspect examples/exhibition-guide/stress/trial-report.md."
+}

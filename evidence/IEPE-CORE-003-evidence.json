@@ -1,0 +1,56 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-003.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-003",
+  "candidateId": null,
+  "artifactRefs": [
+    "tools/validate.py",
+    "fixtures/conformance.json",
+    "requirements-dev.txt",
+    "README.md"
+  ],
+  "intentRefs": ["ROADMAP.md#m1-adoption-kit"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": {
+    "python": "3.12",
+    "jsonSchemaDialect": "2020-12",
+    "dependencySource": "requirements-dev.txt"
+  },
+  "inputs": ["six positive fixtures", "six empty-object negative fixtures", "deliberate forbidden-term probe"],
+  "provenance": ["IEPE-CORE-003 execution cycle"],
+  "evaluations": [
+    {
+      "dimension": "reproducibility",
+      "result": "one repository-owned command validates the current contract suite",
+      "evaluator": "tools/validate.py",
+      "evidenceRefs": ["clean conformance output"]
+    },
+    {
+      "dimension": "failure behavior",
+      "result": "deliberate forbidden-term violation returned status 1",
+      "evaluator": "negative conformance probe",
+      "evidenceRefs": ["negative probe output"]
+    },
+    {
+      "dimension": "coverage",
+      "result": "6 schemas, 7 issue templates, 1 prior evidence bundle, and domain neutrality passed",
+      "evaluator": "tools/validate.py",
+      "evidenceRefs": ["clean conformance output"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "validation depended on an undeclared environment-specific command",
+    "after": "dependencies, fixtures, and validation behavior are repository-owned"
+  },
+  "cost": null,
+  "tradeoffs": ["Development validation requires Python dependencies rather than a zero-dependency binary"],
+  "limitations": [
+    "The runner has not been exercised in continuous integration",
+    "The runner validates structural conformance, not project-specific semantic quality",
+    "No external adopter has executed the command"
+  ],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Install requirements-dev.txt and run python3 tools/validate.py. Set IEPE_FORBIDDEN_TERMS to audit adoption-specific leakage."
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-008.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-008",
+  "candidateId": "coordinator.receipt-replay.1",
+  "artifactRefs": [
+    "iepe_core/receipts.py",
+    "iepe_core/coordinator.py",
+    "tests/test_receipts.py",
+    "tests/test_coordinator.py"
+  ],
+  "intentRefs": ["ROADMAP.md#m2-coordinator-reference", "work/IEPE-CORE-008.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "docs/COORDINATOR.md", "AGENTS.md"],
+  "environment": { "type": "local deterministic reference", "language": "Python 3.12", "digest": "SHA-256" },
+  "inputs": ["completed receipt", "stopped receipt", "tampered payload", "unsupported version", "impossible history", "wrong subject", "missing provenance"],
+  "provenance": ["IEPE-CORE-008 coordinator cycle"],
+  "evaluations": [
+    {
+      "dimension": "round-trip persistence",
+      "result": "completed and stopped receipts serialize and replay successfully",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_receipts.py"]
+    },
+    {
+      "dimension": "integrity",
+      "result": "altered payload fails SHA-256 integrity verification",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_receipts.py"]
+    },
+    {
+      "dimension": "history validity",
+      "result": "re-signed but impossible transition history is rejected",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_receipts.py"]
+    },
+    {
+      "dimension": "assertion provenance",
+      "result": "wrong subject and missing evidence references reject during replay",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_receipts.py"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "execution receipts existed only as in-memory dataclasses",
+    "after": "versioned deterministic envelopes support integrity checking and replay validation"
+  },
+  "cost": null,
+  "tradeoffs": ["JSON favors inspectability over compact binary representation"],
+  "limitations": [
+    "SHA-256 digest is not an identity signature",
+    "No external durable store",
+    "No cross-process resumption implementation",
+    "No schema migration beyond rejecting unsupported versions"
+  ],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run python3 tools/validate.py and inspect tests/test_receipts.py."
+}

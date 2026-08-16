@@ -1,0 +1,53 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-006.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-006",
+  "candidateId": "coordinator.state-machine.1",
+  "artifactRefs": [
+    "iepe_core/coordinator.py",
+    "tests/test_coordinator.py",
+    "evidence/traces/coordinator-traces.json",
+    "docs/COORDINATOR.md"
+  ],
+  "intentRefs": ["ROADMAP.md#m2-coordinator-reference", "work/IEPE-CORE-006.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": { "type": "local deterministic reference", "language": "Python 3.12" },
+  "inputs": ["valid delivery", "valid experiment", "invalid transition", "missing gate evidence", "ambiguous workspace stop"],
+  "provenance": ["IEPE-CORE-006 coordinator cycle"],
+  "evaluations": [
+    {
+      "dimension": "valid state progression",
+      "result": "delivery and experiment reach complete through 12 guarded transitions",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_coordinator.py", "evidence/traces/coordinator-traces.json"]
+    },
+    {
+      "dimension": "invalid transition safety",
+      "result": "direct preflight-to-claim transition rejected",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_coordinator.py"]
+    },
+    {
+      "dimension": "stop-state integrity",
+      "result": "stop receipt preserves reason, originating state, evidence, and resumption authority",
+      "evaluator": "unittest",
+      "evidenceRefs": ["evidence/traces/coordinator-traces.json"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "coordinator existed only as a documented sequence",
+    "after": "provider-neutral executable state machine with seven tests and terminal receipts"
+  },
+  "cost": null,
+  "tradeoffs": ["Gate evidence is represented by string assertions in this first reference"],
+  "limitations": [
+    "No live provider adapter",
+    "No worker spawning",
+    "No persistence across process restarts",
+    "Evidence assertions are not yet typed or cryptographically bound"
+  ],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Install development requirements and run python3 tools/validate.py."
+}

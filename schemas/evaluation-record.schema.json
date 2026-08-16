@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepe.dev/schema/evaluation-record.schema.json",
+  "title": "IEPE Evaluation Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "subjectRef", "evaluator", "independence", "dimensions", "limitations", "disposition"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "minLength": 1 },
+    "subjectRef": { "type": "string", "minLength": 1 },
+    "baselineRef": { "type": ["string", "null"] },
+    "evaluator": { "type": "string", "minLength": 1 },
+    "independence": { "enum": ["independent", "partially-independent", "self-evaluation"] },
+    "environmentRef": { "type": ["string", "null"] },
+    "dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "result", "evidenceRefs"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "result": {},
+          "threshold": {},
+          "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+        }
+      }
+    },
+    "tradeoffs": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "disposition": { "enum": ["reject", "retain", "retry", "revise", "escalate", "qualify"] }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-009.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-009",
+  "candidateId": "coordinator.claim-registry.1",
+  "artifactRefs": ["iepe_core/claims.py", "tests/test_claims.py", "iepe_core/__init__.py"],
+  "intentRefs": ["ROADMAP.md#m2-coordinator-reference", "work/IEPE-CORE-009.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "docs/COORDINATOR.md", "AGENTS.md"],
+  "environment": {"type": "local deterministic reference", "language": "Python 3.12"},
+  "inputs": ["capacity limits", "hierarchical scopes", "read and write modes", "expiration", "repeated release"],
+  "provenance": ["IEPE-CORE-009 coordinator cycle"],
+  "evaluations": [
+    {"dimension": "capacity and conflict", "result": "excess capacity and overlapping mutable scope are rejected", "evaluator": "unittest", "evidenceRefs": ["tests/test_claims.py"]},
+    {"dimension": "coexistence", "result": "read-only overlap and separate workspaces coexist", "evaluator": "unittest", "evidenceRefs": ["tests/test_claims.py"]},
+    {"dimension": "lifecycle", "result": "expiration invalidates authority and repeated release preserves history", "evaluator": "unittest", "evidenceRefs": ["tests/test_claims.py"]},
+    {"dimension": "gate provenance", "result": "claim.valid assertions derive from matching active registry state", "evaluator": "unittest", "evidenceRefs": ["tests/test_claims.py"]}
+  ],
+  "baselineComparison": {"before": "claim gates accepted manually constructed assertions", "after": "a typed registry derives claim assertions from active state"},
+  "cost": null,
+  "tradeoffs": ["hierarchical string scopes favor portability over provider-specific lock precision"],
+  "limitations": ["in-memory only", "no distributed consensus", "expiration cleanup is evaluated lazily"],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run python3 tools/validate.py and inspect tests/test_claims.py."
+}

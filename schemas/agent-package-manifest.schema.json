@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepe.dev/schema/agent-package-manifest.schema.json",
+  "title": "IEPE Agent Project Package Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["formatVersion", "packageId", "packageVersion", "protocol", "releaseClass", "sourceState", "operatingContract", "sources", "skills", "adapters", "outputs", "exclusions", "payloadSha256"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "formatVersion": {"const": "1"},
+    "packageId": {"type": "string", "minLength": 1},
+    "packageVersion": {"type": "string", "minLength": 1},
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocolId", "protocolVersion", "source", "revision"],
+      "properties": {
+        "protocolId": {"const": "IEPE-001"},
+        "protocolVersion": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "revision": {"type": "string", "minLength": 7}
+      }
+    },
+    "releaseClass": {"enum": ["provisional", "release"]},
+    "sourceState": {"enum": ["clean", "dirty", "unknown", "provisional"]},
+    "operatingContract": {"type": "string", "minLength": 1},
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "role", "authorityRank", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "role": {"enum": ["intent", "doctrine", "ontology", "schema", "implementation", "operations", "evidence", "historical"]},
+          "authorityRank": {"type": "integer", "minimum": 1},
+          "bytes": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "skills": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "adapters": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "outputs": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "exclusions": {"type": "array", "items": {"type": "string"}},
+    "payloadSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

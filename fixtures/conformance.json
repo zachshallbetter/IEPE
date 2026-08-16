@@ -1,0 +1,219 @@
+{
+  "agent-package-source.schema.json": {
+    "packageId": "package.example",
+    "packageVersion": "0.1.0",
+    "projectRoot": ".",
+    "protocol": {"protocolId": "IEPE-001", "protocolVersion": "0.1.0", "source": "https://example.test/iepe-core", "revision": "v0.1.0-test"},
+    "releaseClass": "provisional",
+    "sourceState": "provisional",
+    "operatingContract": "AGENTS.md",
+    "sources": [{"path": "AGENTS.md", "role": "operations", "authorityRank": 1}],
+    "skills": ["operate-iepe-project"],
+    "adapters": [],
+    "exclusions": [".git"]
+  },
+  "agent-package-manifest.schema.json": {
+    "formatVersion": "1",
+    "packageId": "package.example",
+    "packageVersion": "0.1.0",
+    "protocol": {"protocolId": "IEPE-001", "protocolVersion": "0.1.0", "source": "https://example.test/iepe-core", "revision": "v0.1.0-test"},
+    "releaseClass": "provisional",
+    "sourceState": "provisional",
+    "operatingContract": "AGENTS.source.md",
+    "sources": [{"path": "INTENT.md", "role": "intent", "authorityRank": 1, "bytes": 10, "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}],
+    "skills": ["evidence-closure"],
+    "adapters": ["work-graph.example"],
+    "outputs": [
+      {"path": "AGENTS.md", "bytes": 10, "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},
+      {"path": "context-index.md", "bytes": 10, "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},
+      {"path": "context-full.md", "bytes": 10, "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"}
+    ],
+    "exclusions": ["__pycache__"],
+    "payloadSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "project-profile.schema.json": {
+    "id": "project.example",
+    "name": "Example Project",
+    "protocol": {"protocolId": "IEPE-001", "protocolVersion": "0.1.0", "source": "https://example.test/iepe-core", "revision": "v0.1.0-test"},
+    "intentRefs": ["docs/INTENT.md"],
+    "authorityOrder": ["docs/INTENT.md", "AGENTS.md"],
+    "workGraph": { "provider": "github", "projectRefs": ["project.example"] },
+    "workspaces": ["workspace.example"],
+    "coordinator": { "identity": "coordinator.example", "capacity": 1, "stopPolicyRef": "AGENTS.md#stop-rule" },
+    "evaluators": ["validator.schema"],
+    "protectedActions": ["publication"],
+    "promotionAuthorities": ["owner.example"],
+    "memory": { "operational": "issues", "institutional": "docs", "negativeResults": "docs/rejected" }
+  },
+  "protocol-reference.schema.json": {
+    "protocolId": "IEPE-001",
+    "protocolVersion": "0.1.0",
+    "source": "https://example.test/iepe-core",
+    "revision": "v0.1.0-test",
+    "relationship": "reference",
+    "conformanceCommand": "python3 tools/validate.py"
+  },
+  "experience-contract.schema.json": {
+    "id": "experience.example",
+    "intent": "Help a participant complete the central task with confidence.",
+    "audience": { "primary": "participants", "contexts": ["first use"] },
+    "desiredOutcomes": ["complete the task"],
+    "experientialQualities": ["clear", "calm"],
+    "behaviorsToEncourage": ["informed choice"],
+    "behaviorsToAvoid": ["accidental commitment"],
+    "states": ["initial", "active", "error", "recovery"],
+    "constraints": ["preserve reversibility"],
+    "accessibilityRequirements": ["keyboard-complete operation"],
+    "evidenceRequirements": ["observed task completion"],
+    "authorityRefs": ["docs/INTENT.md"]
+  },
+  "issue-contract.schema.json": {
+    "id": "ISSUE-001",
+    "type": "delivery",
+    "title": "Deliver an example outcome",
+    "intentRefs": ["docs/INTENT.md"],
+    "experienceRefs": ["experience.example"],
+    "objective": "Produce the defined outcome.",
+    "hypothesis": null,
+    "owner": "owner.example",
+    "workspace": "workspace.example",
+    "parent": "EPIC-001",
+    "dependencies": [],
+    "acceptanceCriteria": ["outcome exists"],
+    "evidenceRequired": ["independent review"],
+    "constraints": ["remain reversible"],
+    "exclusions": [],
+    "permissions": { "externalWrites": false, "deployments": false, "communications": false, "spending": false },
+    "budget": { "time": "one cycle", "cost": 0, "iterations": 3 },
+    "stopConditions": ["authority becomes ambiguous"]
+  },
+  "context-packet.schema.json": {
+    "id": "context.ISSUE-1.claim-1",
+    "issueId": "ISSUE-1",
+    "claimId": "claim-1",
+    "objective": "Produce the bounded outcome.",
+    "sources": [{"ref": "INTENT.md", "kind": "intent", "authorityRank": 1, "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}],
+    "dependencies": {"DEP-1": "complete"},
+    "constraints": ["remain reversible"],
+    "evidenceRequired": ["independent review"],
+    "permissions": {"externalWrites": false},
+    "stopConditions": ["authority becomes ambiguous"],
+    "contextSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "evaluation-record.schema.json": {
+    "id": "evaluation.example.1",
+    "subjectRef": "artifact.example.1",
+    "baselineRef": null,
+    "evaluator": "reviewer.example",
+    "independence": "independent",
+    "environmentRef": "environment.example",
+    "dimensions": [
+      { "name": "intent alignment", "result": "pass", "threshold": "pass", "evidenceRefs": ["observation.example"] }
+    ],
+    "tradeoffs": [],
+    "limitations": ["single environment"],
+    "disposition": "qualify"
+  },
+  "evidence-bundle.schema.json": {
+    "id": "evidence.example.1",
+    "projectId": "project.example",
+    "issueId": "ISSUE-001",
+    "candidateId": null,
+    "artifactRefs": ["artifact.example.1"],
+    "intentRefs": ["docs/INTENT.md"],
+    "authorityRefs": ["AGENTS.md"],
+    "environment": { "name": "example" },
+    "inputs": [],
+    "provenance": ["run.example.1"],
+    "evaluations": [
+      { "dimension": "intent alignment", "result": "pass", "evaluator": "reviewer.example", "evidenceRefs": ["observation.example"] }
+    ],
+    "baselineComparison": null,
+    "cost": null,
+    "tradeoffs": [],
+    "limitations": ["single environment"],
+    "qualification": "tested",
+    "promotionRecommendation": "promote",
+    "reproduction": "Run the declared evaluator."
+  },
+  "promotion-record.schema.json": {
+    "id": "promotion.example.1",
+    "subjectRef": "artifact.example.1",
+    "issueRef": "ISSUE-001",
+    "evidenceBundleRef": "evidence.example.1",
+    "authority": "owner.example",
+    "decision": "approved",
+    "target": "baseline.example",
+    "tradeoffs": [],
+    "conditions": [],
+    "recoveryPlan": "Restore the previous baseline.",
+    "effectiveAt": null
+  },
+  "migration-record.schema.json": {
+    "id": "migration.example",
+    "source": { "provider": "tracker", "itemId": "ITEM-1", "status": "Open", "url": null },
+    "classification": "active",
+    "disposition": "reconcile",
+    "targetStatus": "In progress",
+    "statusRationale": "An active claim exists.",
+    "intentRefs": ["intent.example"],
+    "relationshipRefs": [],
+    "provenance": "partial",
+    "evidenceGaps": ["acceptance criteria missing"],
+    "decision": "needs-review",
+    "notes": null
+  },
+  "perturbation.schema.json": {
+    "id": "perturbation.example",
+    "family": "constraint",
+    "visibility": "sealed",
+    "protectedInvariants": ["project intent"],
+    "changedConditions": ["available time is reduced"],
+    "revealGate": "candidate-frozen",
+    "evaluationDimensions": ["task completion"],
+    "severity": "moderate",
+    "recoveryRequired": true,
+    "steward": "steward.example"
+  },
+  "worker-dispatch.schema.json": {
+    "id": "dispatch.example.1",
+    "issueId": "ISSUE-1",
+    "claimId": "claim-1",
+    "contextSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "workerId": "worker.example",
+    "role": "resolver",
+    "attempt": 1,
+    "permissions": {"localWrites": true, "externalWrites": false},
+    "status": "completed",
+    "result": {"artifacts": ["artifact.example"], "observations": [], "commands": ["test"], "cost": null, "limitations": ["local only"]}
+  },
+  "world-card.schema.json": {
+    "id": "world.example",
+    "perturbationRef": "perturbation.example",
+    "premise": "The participant has half the expected time.",
+    "retained": ["project intent"],
+    "changed": ["available time"],
+    "questions": ["Does the result remain usable?"],
+    "evidenceRequired": ["bounded trial"],
+    "revealState": "revealed",
+    "candidateFreezeRef": "candidate.example.frozen"
+  },
+  "robustness-profile.schema.json": {
+    "id": "robustness.example",
+    "candidateRef": "candidate.example",
+    "knownQualificationRef": "evaluation.example",
+    "surpriseBudget": { "evaluationShare": 0.15, "minimumWorldCards": 2, "candidateVisibility": "sealed-until-frozen" },
+    "trials": [
+      { "worldCardRef": "world.example", "disposition": "bounded", "evidenceRefs": ["trial.example"], "limitations": [] }
+    ],
+    "validityBoundary": ["expected operating conditions"],
+    "promotionEffect": "constrain"
+  },
+  "unknown-variable-ledger.schema.json": {
+    "id": "unknowns.example",
+    "projectRef": "project.example",
+    "entries": [
+      { "id": "unknown.example.1", "variable": "future operating context", "classification": "assumed-untested", "evidenceRefs": [], "nextProbe": "Create a context World Card" }
+    ]
+  }
+}

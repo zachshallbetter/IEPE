@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../schemas/world-card.schema.json",
+  "id": "world.exhibition.format-loss",
+  "perturbationRef": "perturbation.exhibition.format-loss",
+  "premise": "The guide is reproduced as plain text with no headings, bullets, emphasis, or spatial grouping.",
+  "retained": ["all candidate wording", "visitor agency", "factual standards"],
+  "changed": ["visual hierarchy", "scannability cues"],
+  "questions": ["Does the text still state that there is no required route?", "Do the three invitations remain distinguishable?"],
+  "evidenceRequired": ["literal plain-text inspection against the frozen candidate"],
+  "revealState": "revealed",
+  "candidateFreezeRef": "freeze.exhibition.candidate-b.1"
+}

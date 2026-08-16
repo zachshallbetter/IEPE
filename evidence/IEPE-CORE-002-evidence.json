@@ -1,0 +1,66 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-002.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-002",
+  "candidateId": null,
+  "artifactRefs": [
+    "schemas/project-profile.schema.json",
+    "schemas/experience-contract.schema.json",
+    "schemas/evaluation-record.schema.json",
+    "schemas/promotion-record.schema.json",
+    "schemas/issue-contract.schema.json",
+    "schemas/evidence-bundle.schema.json",
+    ".github/ISSUE_TEMPLATE/design.yml",
+    ".github/ISSUE_TEMPLATE/evaluation.yml",
+    ".github/ISSUE_TEMPLATE/decision.yml",
+    ".github/ISSUE_TEMPLATE/incident.yml",
+    ".github/ISSUE_TEMPLATE/promotion.yml",
+    ".github/ISSUE_TEMPLATE/delivery.yml",
+    ".github/ISSUE_TEMPLATE/experiment.yml"
+  ],
+  "intentRefs": ["README.md#first-milestone", "ROADMAP.md#m1-adoption-kit"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": {
+    "jsonSchemaDialect": "2020-12",
+    "jsonSchemaValidator": "jsonschema 4.26.0",
+    "yamlParser": "PyYAML",
+    "executionClass": "local isolated validation"
+  },
+  "inputs": ["representative positive fixture per schema", "empty-object negative fixture per schema"],
+  "provenance": ["IEPE-CORE-002 execution cycle"],
+  "evaluations": [
+    {
+      "dimension": "schema correctness",
+      "result": "6 of 6 schemas accepted valid fixtures and rejected invalid fixtures",
+      "evaluator": "Draft202012Validator",
+      "evidenceRefs": ["validation output"]
+    },
+    {
+      "dimension": "template structure",
+      "result": "7 of 7 YAML templates parsed with unique field identifiers",
+      "evaluator": "PyYAML structural evaluator",
+      "evidenceRefs": ["validation output"]
+    },
+    {
+      "dimension": "domain neutrality",
+      "result": "one residual originating-project reference found and corrected; no runtime dependency remains",
+      "evaluator": "literal terminology audit",
+      "evidenceRefs": ["README.md"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "2 schemas and 2 issue templates",
+    "after": "6 schemas and 7 issue templates"
+  },
+  "cost": null,
+  "tradeoffs": ["Templates prioritize completeness over compact issue entry"],
+  "limitations": [
+    "No live GitHub rendering test was available",
+    "Fixtures cover structural contracts rather than all semantic edge cases",
+    "No external project has adopted the suite"
+  ],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Validate every schema with Draft 2020-12 positive and negative fixtures; parse every issue template as YAML and assert unique body IDs."
+}

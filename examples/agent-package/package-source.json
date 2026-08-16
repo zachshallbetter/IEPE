@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../schemas/agent-package-source.schema.json",
+  "manifestSchema": "../../../schemas/agent-package-manifest.schema.json",
+  "packageId": "project.example.agent-package",
+  "packageVersion": "0.1.0",
+  "protocol": {"protocolId": "IEPE-001", "protocolVersion": "0.1.0", "source": "../../../", "revision": "v0.1.0-example"},
+  "projectRoot": "project",
+  "releaseClass": "release",
+  "sourceState": "clean",
+  "operatingContract": "OPERATING.md",
+  "sources": [
+    {"path": "INTENT.md", "role": "intent", "authorityRank": 1},
+    {"path": "OPERATING.md", "role": "doctrine", "authorityRank": 2},
+    {"path": "OPERATIONS.md", "role": "operations", "authorityRank": 3}
+  ],
+  "skills": ["documentation-alignment", "evidence-closure", "issue-grooming"],
+  "adapters": ["work-graph.example"],
+  "exclusions": ["__MACOSX", "__pycache__", "*.pyc", ".git", "undeclared files"]
+}

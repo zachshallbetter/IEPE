@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepe.dev/schema/perturbation.schema.json",
+  "title": "IEPE Designed Perturbation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "family", "visibility", "protectedInvariants", "changedConditions", "revealGate", "evaluationDimensions", "severity", "recoveryRequired"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "minLength": 1 },
+    "family": { "enum": ["context", "constraint", "evidence", "actor", "time", "dependency", "scale", "intent-collision"] },
+    "visibility": { "enum": ["sealed", "revealed"] },
+    "protectedInvariants": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "changedConditions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "revealGate": { "const": "candidate-frozen" },
+    "evaluationDimensions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "severity": { "enum": ["low", "moderate", "high"] },
+    "recoveryRequired": { "type": "boolean" },
+    "steward": { "type": ["string", "null"] }
+  }
+}

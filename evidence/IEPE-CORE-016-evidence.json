@@ -1,0 +1,82 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-016.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-016",
+  "candidateId": "reference-pinned-project-bootstrap.1",
+  "artifactRefs": [
+    "docs/INITIALIZATION.md",
+    "docs/UPSTREAM_REFERENCE.md",
+    "schemas/protocol-reference.schema.json",
+    "schemas/agent-package-source.schema.json",
+    "iepe_core/bootstrap.py",
+    "tools/init_project.py",
+    "tests/test_bootstrap.py",
+    ".agents/skills/initialize-iepe-project/SKILL.md"
+  ],
+  "intentRefs": ["ROADMAP.md#m1-adoption-kit", "work/IEPE-CORE-016.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md", "docs/AGENT_PROJECT_PACKAGE.md"],
+  "environment": {
+    "type": "local deterministic reference and synthetic cross-domain pilot",
+    "language": "Python 3.12",
+    "validation": "jsonschema 4.26.0 and PyYAML 6.0.3 in isolated environment"
+  },
+  "inputs": [
+    "project identity and originating intent",
+    "explicit IEPE source and immutable revision",
+    "work-graph provider",
+    "evaluators",
+    "promotion authority"
+  ],
+  "provenance": ["IEPE-CORE-016 implementation and conformance cycle"],
+  "evaluations": [
+    {
+      "dimension": "deterministic initialization",
+      "result": "identical inputs produce identical generated files",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_bootstrap.py"]
+    },
+    {
+      "dimension": "authority and overwrite safety",
+      "result": "existing files are preserved without explicit overwrite and existing-project discovery preserves all inspected bytes",
+      "evaluator": "unittest and synthetic pilot",
+      "evidenceRefs": ["tests/test_bootstrap.py", "tools/init_project.py"]
+    },
+    {
+      "dimension": "protocol provenance",
+      "result": "project profile, package source, and compiled manifest retain the same IEPE identity, source, version, and revision",
+      "evaluator": "schema validation and package compiler",
+      "evidenceRefs": ["schemas/protocol-reference.schema.json", "schemas/project-profile.schema.json", "schemas/agent-package-source.schema.json", "schemas/agent-package-manifest.schema.json"]
+    },
+    {
+      "dimension": "agent operability",
+      "result": "a synthetic design project generated six validated process skills and an explicit read-only first-cycle prompt",
+      "evaluator": "synthetic cross-domain bootstrap",
+      "evidenceRefs": [".agents/skills", "iepe_core/bootstrap.py"]
+    },
+    {
+      "dimension": "repository conformance",
+      "result": "16 schemas, 8 issue templates, 6 process skills, 14 evidence bundles, 16 example records, domain neutrality, and 46 reference tests pass",
+      "evaluator": "tools/validate.py",
+      "evidenceRefs": ["tools/validate.py", "tests/test_bootstrap.py"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "initialization and command surfaces were documented but adopters had to assemble their own project-local operating layer",
+    "after": "one command creates a reference-pinned, skill-equipped, package-ready project without claiming unresolved local authority"
+  },
+  "cost": null,
+  "tradeoffs": [
+    "the bootstrap projects procedural skill copies into the adopter while retaining upstream protocol authority",
+    "greenfield defaults are explicitly provisional and require local confirmation before work becomes Ready"
+  ],
+  "limitations": [
+    "the initializer records but does not cryptographically resolve or attest the supplied upstream revision",
+    "existing-project mode inventories but does not generate or apply a migration overlay",
+    "conversational initialization is not implemented",
+    "no live GitHub adapter or unrelated external project has completed the full IEPE trace"
+  ],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Install requirements-dev.txt in an isolated environment, run python3 tools/validate.py, then run tools/init_project.py new and compile the generated .agents/package-source.json."
+}

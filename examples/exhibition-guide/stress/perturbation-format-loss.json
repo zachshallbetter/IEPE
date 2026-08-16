@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../schemas/perturbation.schema.json",
+  "id": "perturbation.exhibition.format-loss",
+  "family": "constraint",
+  "visibility": "revealed",
+  "protectedInvariants": ["visitor agency", "no invented interpretation", "promotion authority"],
+  "changedConditions": ["headings and typographic hierarchy are removed during reproduction"],
+  "revealGate": "candidate-frozen",
+  "evaluationDimensions": ["instruction survival", "visitor agency", "factual integrity"],
+  "severity": "moderate",
+  "recoveryRequired": false,
+  "steward": "perturbation-steward.synthetic"
+}

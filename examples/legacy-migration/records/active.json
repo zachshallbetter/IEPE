@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../schemas/migration-record.schema.json",
+  "id": "migration.legacy-18",
+  "source": { "provider": "example-tracker", "itemId": "LEGACY-18", "status": "Doing", "url": null },
+  "classification": "active",
+  "disposition": "reconcile",
+  "targetStatus": "In progress",
+  "statusRationale": "An active claim is present, but acceptance and evidence must be reconciled before review.",
+  "intentRefs": ["intent.participant-guide"],
+  "relationshipRefs": ["EPIC-3"],
+  "provenance": "partial",
+  "evidenceGaps": ["acceptance criteria missing", "evaluation requirement missing", "claim identity not verified"],
+  "decision": "needs-review",
+  "notes": "Do not advance until the reconciliation packet is complete."
+}

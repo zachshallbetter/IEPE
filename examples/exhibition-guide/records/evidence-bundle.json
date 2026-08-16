@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../schemas/evidence-bundle.schema.json",
+  "id": "evidence.exhibition-guide.1",
+  "projectId": "project.exhibition-guide",
+  "issueId": "IEPE-CORE-004-PILOT",
+  "candidateId": "candidate-b-choice-led",
+  "artifactRefs": ["../candidates/candidate-b-choice-led.md"],
+  "intentRefs": ["../INTENT.md"],
+  "authorityRefs": ["experience-contract.json", "issue-contract.json"],
+  "environment": { "type": "synthetic editorial pilot", "externalSideEffects": false },
+  "inputs": ["candidate-a-route-led.md", "candidate-b-choice-led.md"],
+  "provenance": ["IEPE-CORE-004 coordinator cycle"],
+  "evaluations": [
+    {
+      "dimension": "structural intent alignment",
+      "result": "Candidate B passes route-neutrality and visitor-agency thresholds",
+      "evaluator": "evaluator.editorial-structure",
+      "evidenceRefs": ["evaluation-record.json"]
+    },
+    {
+      "dimension": "human comprehension",
+      "result": "not observed",
+      "evaluator": "not executed",
+      "evidenceRefs": ["experience-contract.json"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "title only, with no orientation or route options",
+    "after": "three explicit entry choices with freedom to change direction"
+  },
+  "cost": { "external": 0, "iterations": 2 },
+  "tradeoffs": ["less curatorial sequence context"],
+  "limitations": ["synthetic example", "no human observation", "no graphic-layout evaluation"],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Review both candidate files against INTENT.md and experience-contract.json, then validate all records with the IEPE conformance runner."
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../schemas/project-profile.schema.json",
+  "id": "project.exhibition-guide",
+  "name": "Ways of Seeing Water Visitor Guide",
+  "protocol": {"protocolId": "IEPE-001", "protocolVersion": "0.1.0", "source": "../../../", "revision": "v0.1.0-example"},
+  "intentRefs": ["../INTENT.md"],
+  "authorityOrder": ["../INTENT.md", "experience-contract.json", "issue-contract.json"],
+  "workGraph": { "provider": "local-reference", "projectRefs": ["IEPE-CORE-004"] },
+  "workspaces": ["examples/exhibition-guide"],
+  "coordinator": { "identity": "coordinator.iepe-core", "capacity": 1, "stopPolicyRef": "../../../AGENTS.md#stop-rule" },
+  "evaluators": ["evaluator.editorial-structure"],
+  "protectedActions": ["external publication", "claims about visitor behavior"],
+  "promotionAuthorities": ["authority.example-owner"],
+  "memory": {
+    "operational": "coordinator-trace.md",
+    "institutional": "../INTENT.md",
+    "negativeResults": "../negative-results.md"
+  }
+}

@@ -1,0 +1,36 @@
+name: IEPE Design
+description: Explore, specify, prototype, or validate a human-facing experience.
+title: "[Design] "
+body:
+  - type: textarea
+    id: intent
+    attributes: { label: Intent and human outcome }
+    validations: { required: true }
+  - type: textarea
+    id: audience
+    attributes: { label: Audience and context }
+    validations: { required: true }
+  - type: textarea
+    id: contract
+    attributes: { label: Experience, journey, and interaction contracts }
+    validations: { required: true }
+  - type: textarea
+    id: candidates
+    attributes: { label: Candidate directions }
+    validations: { required: true }
+  - type: textarea
+    id: states
+    attributes: { label: States, inputs, breakpoints, and recovery }
+    validations: { required: true }
+  - type: textarea
+    id: evidence
+    attributes: { label: Automated and human evidence }
+    validations: { required: true }
+  - type: textarea
+    id: constraints
+    attributes: { label: Accessibility, design-system, and ethical constraints }
+    validations: { required: true }
+  - type: textarea
+    id: maturity
+    attributes: { label: Entry and target design maturity }
+    validations: { required: true }

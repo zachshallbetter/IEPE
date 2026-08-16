@@ -1,0 +1,32 @@
+name: IEPE Evaluation
+description: Independently assess a claim, artifact, or candidate set.
+title: "[Evaluation] "
+body:
+  - type: textarea
+    id: subject
+    attributes: { label: Subject and governing intent }
+    validations: { required: true }
+  - type: textarea
+    id: independence
+    attributes: { label: Evaluator and independence }
+    validations: { required: true }
+  - type: textarea
+    id: baseline
+    attributes: { label: Baseline, environment, and inputs }
+    validations: { required: true }
+  - type: textarea
+    id: dimensions
+    attributes: { label: Dimensions and thresholds }
+    validations: { required: true }
+  - type: textarea
+    id: evidence
+    attributes: { label: Required evidence }
+    validations: { required: true }
+  - type: textarea
+    id: limitations
+    attributes: { label: Limitations and generalization boundary }
+    validations: { required: true }
+  - type: textarea
+    id: disposition
+    attributes: { label: Permitted dispositions }
+    validations: { required: true }

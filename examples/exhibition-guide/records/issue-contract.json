@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../schemas/issue-contract.schema.json",
+  "id": "IEPE-CORE-004-PILOT",
+  "type": "experiment",
+  "title": "Develop the exhibition entry guide",
+  "intentRefs": ["../INTENT.md"],
+  "experienceRefs": ["experience.exhibition-entry"],
+  "objective": "Select a structurally qualified one-page guide from distinct editorial candidates.",
+  "hypothesis": "A choice-led guide will preserve visitor agency more reliably than a route-led guide.",
+  "owner": "coordinator.iepe-core",
+  "workspace": "examples/exhibition-guide",
+  "parent": "IEPE-CORE-004",
+  "dependencies": [],
+  "acceptanceCriteria": [
+    "at least two structurally different candidates exist",
+    "candidates remain within 180 words",
+    "evaluation retains separate intent-alignment dimensions",
+    "rejected direction and rationale are preserved",
+    "promotion does not claim human validation"
+  ],
+  "evidenceRequired": ["candidate artifacts", "evaluation record", "negative-result record", "evidence bundle", "promotion record"],
+  "constraints": ["synthetic example only", "no external side effects", "no invented visitor observations"],
+  "exclusions": ["graphic production", "printing", "real visitor study", "external publication"],
+  "permissions": { "externalWrites": false, "deployments": false, "communications": false, "spending": false },
+  "budget": { "time": "one execution cycle", "cost": 0, "iterations": 2 },
+  "stopConditions": ["candidate requires an unsupported human-outcome claim", "core protocol must be weakened to fit the example"]
+}

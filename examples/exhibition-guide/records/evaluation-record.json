@@ -1,0 +1,45 @@
+{
+  "$schema": "../../../schemas/evaluation-record.schema.json",
+  "id": "evaluation.exhibition-guide.1",
+  "subjectRef": "candidate-set.exhibition-guide.1",
+  "baselineRef": "../baseline.md",
+  "evaluator": "evaluator.editorial-structure",
+  "independence": "partially-independent",
+  "environmentRef": "synthetic editorial evaluation",
+  "dimensions": [
+    {
+      "name": "route neutrality",
+      "result": { "candidateA": "fail", "candidateB": "pass" },
+      "threshold": "must not prescribe a required sequence",
+      "evidenceRefs": ["../candidates/candidate-a-route-led.md", "../candidates/candidate-b-choice-led.md"]
+    },
+    {
+      "name": "visitor agency",
+      "result": { "candidateA": "weak", "candidateB": "strong" },
+      "threshold": "must provide a meaningful choice at entry",
+      "evidenceRefs": ["../INTENT.md", "experience-contract.json"]
+    },
+    {
+      "name": "editorial constraints",
+      "result": { "candidateA": "pass", "candidateB": "pass" },
+      "threshold": "one page, no more than 180 words, plain language",
+      "evidenceRefs": ["../candidates/candidate-a-route-led.md", "../candidates/candidate-b-choice-led.md"]
+    },
+    {
+      "name": "human comprehension",
+      "result": { "candidateA": "not observed", "candidateB": "not observed" },
+      "threshold": "requires real visitor observation",
+      "evidenceRefs": ["experience-contract.json"]
+    }
+  ],
+  "tradeoffs": [
+    "Candidate B gives less curatorial sequence context than Candidate A",
+    "Question-led entry depends on the three questions being legible in the final graphic composition"
+  ],
+  "limitations": [
+    "No visitor participated",
+    "No printed layout was evaluated",
+    "Accessibility requirements were specified but not observed in use"
+  ],
+  "disposition": "qualify"
+}

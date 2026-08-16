@@ -1,0 +1,28 @@
+name: IEPE Promotion
+description: Move a qualified result into authority, production, publication, or operation.
+title: "[Promotion] "
+body:
+  - type: textarea
+    id: subject
+    attributes: { label: Qualified subject and target }
+    validations: { required: true }
+  - type: textarea
+    id: authority
+    attributes: { label: Promotion authority }
+    validations: { required: true }
+  - type: textarea
+    id: evidence
+    attributes: { label: Evidence bundle and qualification }
+    validations: { required: true }
+  - type: textarea
+    id: tradeoffs
+    attributes: { label: Regressions, tradeoffs, and conditions }
+    validations: { required: true }
+  - type: textarea
+    id: recovery
+    attributes: { label: Rollback, revocation, or recovery plan }
+    validations: { required: true }
+  - type: textarea
+    id: verification
+    attributes: { label: Post-promotion verification }
+    validations: { required: true }

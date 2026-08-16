@@ -1,0 +1,51 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-005.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-005",
+  "candidateId": "migration.incremental.1",
+  "artifactRefs": [
+    "docs/MIGRATION.md",
+    "schemas/migration-record.schema.json",
+    "examples/legacy-migration/before.json",
+    "examples/legacy-migration/records/historical.json",
+    "examples/legacy-migration/records/active.json",
+    "examples/legacy-migration/records/new.json",
+    "examples/legacy-migration/after.md"
+  ],
+  "intentRefs": ["ROADMAP.md#m1-adoption-kit", "work/IEPE-CORE-005.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": { "type": "synthetic legacy backlog migration", "provider": "local reference" },
+  "inputs": ["one historical item", "one active item", "one new item"],
+  "provenance": ["IEPE-CORE-005 coordinator cycle"],
+  "evaluations": [
+    {
+      "dimension": "record conformance",
+      "result": "3 migration records validate against the migration schema",
+      "evaluator": "tools/validate.py",
+      "evidenceRefs": ["examples/legacy-migration/conformance-manifest.json"]
+    },
+    {
+      "dimension": "status honesty",
+      "result": "no source status was converted into unsupported evidence maturity",
+      "evaluator": "migration outcome audit",
+      "evidenceRefs": ["examples/legacy-migration/after.md"]
+    },
+    {
+      "dimension": "identity preservation",
+      "result": "all source item identifiers and relationships remain represented",
+      "evaluator": "before-and-after audit",
+      "evidenceRefs": ["examples/legacy-migration/before.json", "examples/legacy-migration/after.md"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "adoption guide stated a migration rule without an executable record model",
+    "after": "migration classes, sequence, schema, fixture, and stop conditions are tested"
+  },
+  "cost": null,
+  "tradeoffs": ["Incremental adoption leaves some historical records intentionally sparse"],
+  "limitations": ["Synthetic provider", "No live project migration", "No rollback executed against an external system"],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run tools/validate.py and compare the legacy-migration before and after artifacts."
+}

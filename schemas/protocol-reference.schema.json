@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepe.dev/schema/protocol-reference.schema.json",
+  "title": "IEPE Protocol Reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocolId", "protocolVersion", "source", "revision", "relationship", "conformanceCommand"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "protocolId": {"const": "IEPE-001"},
+    "protocolVersion": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "revision": {"type": "string", "minLength": 7},
+    "relationship": {"enum": ["reference", "vendored"]},
+    "conformanceCommand": {"type": "string", "minLength": 1}
+  }
+}

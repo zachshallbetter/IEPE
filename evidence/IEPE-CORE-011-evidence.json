@@ -1,0 +1,26 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-011.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-011",
+  "candidateId": "bounded-context-packet.1",
+  "artifactRefs": ["schemas/context-packet.schema.json", "iepe_core/context.py", "tests/test_context.py"],
+  "intentRefs": ["ROADMAP.md#m2-coordinator-reference", "work/IEPE-CORE-011.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "docs/COORDINATOR.md", "AGENTS.md"],
+  "environment": {"type": "local deterministic reference", "language": "Python 3.12", "digest": "SHA-256"},
+  "inputs": ["active claim", "intent references", "authority references", "dependency states", "permissions", "evidence requirements", "stop conditions"],
+  "provenance": ["IEPE-CORE-011 coordinator cycle"],
+  "evaluations": [
+    {"dimension": "claim binding", "result": "expired or mismatched claims block packet assembly", "evaluator": "unittest", "evidenceRefs": ["tests/test_context.py"]},
+    {"dimension": "context sufficiency", "result": "missing mandatory sources or dependency state blocks assembly", "evaluator": "unittest", "evidenceRefs": ["tests/test_context.py"]},
+    {"dimension": "authority integrity", "result": "conflicting assertions for one subject are surfaced", "evaluator": "unittest", "evidenceRefs": ["tests/test_context.py"]},
+    {"dimension": "boundedness and determinism", "result": "unreferenced sources are omitted, limits are enforced, and repeated assembly is identical", "evaluator": "unittest", "evidenceRefs": ["tests/test_context.py"]}
+  ],
+  "baselineComparison": {"before": "the coordinator required a context gate without a packet implementation", "after": "typed claim-bound packets deterministically select mandatory project context"},
+  "cost": null,
+  "tradeoffs": ["conflicting assertions block assembly instead of automatically resolving through precedence"],
+  "limitations": ["packet includes source hashes rather than embedding source bodies", "no token-budget estimator", "no remote context store"],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run python3 tools/validate.py and inspect tests/test_context.py."
+}

@@ -1,0 +1,61 @@
+name: IEPE Experiment
+description: Test a bounded hypothesis and preserve the result.
+title: "[Experiment] "
+body:
+  - type: textarea
+    id: intent
+    attributes:
+      label: Intent and research question
+    validations:
+      required: true
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+    validations:
+      required: true
+  - type: textarea
+    id: baseline
+    attributes:
+      label: Reproducible baseline
+    validations:
+      required: true
+  - type: textarea
+    id: candidates
+    attributes:
+      label: Candidate families
+      description: Include structurally different approaches where appropriate.
+    validations:
+      required: true
+  - type: textarea
+    id: variables
+    attributes:
+      label: Mutable variables and protected constraints
+    validations:
+      required: true
+  - type: textarea
+    id: evaluation
+    attributes:
+      label: Evaluation and holdout sets
+      description: Define evaluators, dimensions, thresholds, and generalization checks.
+    validations:
+      required: true
+  - type: textarea
+    id: budget
+    attributes:
+      label: Budget and stopping rule
+    validations:
+      required: true
+  - type: textarea
+    id: authority
+    attributes:
+      label: Permissions and promotion boundary
+    validations:
+      required: true
+  - type: textarea
+    id: memory
+    attributes:
+      label: Result retention
+      description: State where positive and negative results will be preserved.
+    validations:
+      required: true

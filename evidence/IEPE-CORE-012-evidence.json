@@ -1,0 +1,25 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-012.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-012",
+  "candidateId": "initialization-protocol.1",
+  "artifactRefs": ["docs/INITIALIZATION.md", "docs/ADOPTION.md", "work/IEPE-CORE-012.md"],
+  "intentRefs": ["ROADMAP.md#m1-adoption-kit", "work/IEPE-CORE-012.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": {"type": "documentation review"},
+  "inputs": ["new-project adoption path", "existing-project reconciliation path", "conversational entry", "domain profiles"],
+  "provenance": ["IEPE-CORE-012 documentation cycle"],
+  "evaluations": [
+    {"dimension": "entry-mode coverage", "result": "greenfield and existing-project procedures are explicit", "evaluator": "documentation review", "evidenceRefs": ["docs/INITIALIZATION.md"]},
+    {"dimension": "authority preservation", "result": "conversation, observed behavior, and historical work cannot silently become governing intent", "evaluator": "protocol review", "evidenceRefs": ["docs/INITIALIZATION.md#mode-b-existing-project"]},
+    {"dimension": "maturity honesty", "result": "proposed command interface is labeled unimplemented", "evaluator": "conformance review", "evidenceRefs": ["docs/INITIALIZATION.md#proposed-command-interface"]}
+  ],
+  "baselineComparison": {"before": "adoption guide provided a minimum checklist and migration pointer", "after": "two complete initialization paths converge on an explicit operational handoff"},
+  "cost": null,
+  "tradeoffs": ["the protocol specifies initializer behavior before implementing its command interface"],
+  "limitations": ["no initializer CLI", "no external-project pilot of conversational initialization"],
+  "qualification": "documented",
+  "promotionRecommendation": "promote",
+  "reproduction": "Read docs/INITIALIZATION.md and run python3 tools/validate.py."
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-014.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-014",
+  "candidateId": "worker-dispatch-interface.1",
+  "artifactRefs": ["schemas/worker-dispatch.schema.json", "iepe_core/dispatch.py", "tests/test_dispatch.py"],
+  "intentRefs": ["ROADMAP.md#m2-coordinator-reference", "work/IEPE-CORE-014.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "docs/COORDINATOR.md", "AGENTS.md"],
+  "environment": {"type": "local provider-neutral reference", "language": "Python 3.12"},
+  "inputs": ["active claim", "context digest", "worker identity", "role", "attempt", "permissions", "worker result"],
+  "provenance": ["IEPE-CORE-014 coordinator cycle"],
+  "evaluations": [
+    {"dimension": "permission containment", "result": "dispatch cannot enable permission denied by the context packet", "evaluator": "unittest", "evidenceRefs": ["tests/test_dispatch.py"]},
+    {"dimension": "provenance", "result": "result must match issue, claim, context, worker, and attempt", "evaluator": "unittest", "evidenceRefs": ["tests/test_dispatch.py"]},
+    {"dimension": "outcome fidelity", "result": "completed, failed, blocked, and stopped remain distinct", "evaluator": "unittest", "evidenceRefs": ["tests/test_dispatch.py"]},
+    {"dimension": "retry safety", "result": "duplicate work, active overlap, stale context, and invalid attempt sequence are rejected", "evaluator": "unittest", "evidenceRefs": ["tests/test_dispatch.py"]}
+  ],
+  "baselineComparison": {"before": "coordinator dispatch was represented only by a gate assertion", "after": "typed envelopes and results preserve permission, identity, context, attempt, and evidence lineage"},
+  "cost": null,
+  "tradeoffs": ["the reference registry is synchronous and in-memory"],
+  "limitations": ["no provider execution adapter", "no cancellation channel", "no durable queue", "no measured token or compute usage"],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run python3 -m unittest tests.test_dispatch -v."
+}

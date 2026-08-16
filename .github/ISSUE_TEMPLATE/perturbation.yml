@@ -1,0 +1,36 @@
+name: IEPE Epistemic Stress Test
+description: Test a frozen candidate against sealed counterfactual conditions.
+title: "[Stress Test] "
+body:
+  - type: textarea
+    id: candidate
+    attributes: { label: Frozen candidate and known qualification }
+    validations: { required: true }
+  - type: textarea
+    id: steward
+    attributes: { label: Perturbation Steward and independence }
+    validations: { required: true }
+  - type: textarea
+    id: invariants
+    attributes: { label: Protected invariants }
+    validations: { required: true }
+  - type: textarea
+    id: budget
+    attributes: { label: Surprise budget and World Card count }
+    validations: { required: true }
+  - type: textarea
+    id: seal
+    attributes: { label: Seal and reveal procedure }
+    validations: { required: true }
+  - type: textarea
+    id: evaluation
+    attributes: { label: Evaluation dimensions and dispositions }
+    validations: { required: true }
+  - type: textarea
+    id: ledger
+    attributes: { label: Unknown-variable ledger update }
+    validations: { required: true }
+  - type: textarea
+    id: promotion
+    attributes: { label: Promotion effects and stop conditions }
+    validations: { required: true }

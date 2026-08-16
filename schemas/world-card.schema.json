@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepe.dev/schema/world-card.schema.json",
+  "title": "IEPE World Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "perturbationRef", "premise", "retained", "changed", "questions", "evidenceRequired", "revealState", "candidateFreezeRef"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "minLength": 1 },
+    "perturbationRef": { "type": "string", "minLength": 1 },
+    "premise": { "type": "string", "minLength": 1 },
+    "retained": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "changed": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "questions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "evidenceRequired": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "revealState": { "enum": ["sealed", "revealed"] },
+    "candidateFreezeRef": { "type": "string", "minLength": 1 }
+  }
+}

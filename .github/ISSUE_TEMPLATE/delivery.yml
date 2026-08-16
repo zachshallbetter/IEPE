@@ -1,0 +1,62 @@
+name: IEPE Delivery
+description: Implement a defined, authorized change.
+title: "[Delivery] "
+body:
+  - type: textarea
+    id: intent
+    attributes:
+      label: Intent
+      description: Link the governing project, experience, capability, or change intent.
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: State the outcome without assuming an unnecessary implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Ownership and relationships
+      description: Identify owner, repository or workspace, parent epic, and native blockers.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence requirements
+      description: Define what supports Done and what additionally supports Verified.
+    validations:
+      required: true
+  - type: textarea
+    id: design
+    attributes:
+      label: Experience and design impact
+      description: Link affected experience, interaction, accessibility, and design-system contracts.
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and exclusions
+    validations:
+      required: true
+  - type: textarea
+    id: authority
+    attributes:
+      label: Permissions and protected actions
+      description: State whether external writes, deployments, communications, or spending are authorized.
+    validations:
+      required: true
+  - type: textarea
+    id: stops
+    attributes:
+      label: Stop and escalation conditions
+    validations:
+      required: true

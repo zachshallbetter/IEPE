@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../schemas/experience-contract.schema.json",
+  "id": "experience.exhibition-entry",
+  "intent": "Give a first-time visitor enough orientation to choose an entry path without prescribing interpretation.",
+  "audience": {
+    "primary": "first-time exhibition visitors",
+    "contexts": ["arriving alone", "arriving with companions", "limited attention", "unfamiliar with exhibition conventions"]
+  },
+  "desiredOutcomes": [
+    "recognize that no route is required",
+    "identify three possible entry approaches",
+    "make an independent starting choice"
+  ],
+  "experientialQualities": ["calm", "inviting", "open", "legible"],
+  "behaviorsToEncourage": ["choose by curiosity", "change direction freely", "pause without penalty"],
+  "behaviorsToAvoid": ["follow a route from perceived obligation", "treat interpretation as a test"],
+  "states": ["arrival", "orientation", "choice", "entry"],
+  "constraints": [
+    "one printed page",
+    "maximum 180 words",
+    "plain language",
+    "no mandatory sequence",
+    "no claims about artwork meaning"
+  ],
+  "accessibilityRequirements": [
+    "headings communicate structure without color",
+    "directions do not rely on left and right alone",
+    "body copy supports large-print reproduction"
+  ],
+  "evidenceRequirements": [
+    "editorial constraint audit",
+    "route-neutrality audit",
+    "human observation before any comprehension claim"
+  ],
+  "authorityRefs": ["../INTENT.md"]
+}

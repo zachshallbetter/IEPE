@@ -1,0 +1,23 @@
+{
+  "valid": {
+    "issueId": "EXPERIMENT-1",
+    "finalState": "complete",
+    "assertionIds": [
+      "assertion.EXPERIMENT-1.preflight.valid",
+      "assertion.EXPERIMENT-1.state.reconciled",
+      "assertion.EXPERIMENT-1.issue.selected",
+      "assertion.EXPERIMENT-1.issue.ready",
+      "assertion.EXPERIMENT-1.claim.valid",
+      "assertion.EXPERIMENT-1.context.bounded",
+      "assertion.EXPERIMENT-1.worker.dispatched",
+      "assertion.EXPERIMENT-1.worker.result",
+      "assertion.EXPERIMENT-1.evaluation.complete",
+      "assertion.EXPERIMENT-1.disposition.selected",
+      "assertion.EXPERIMENT-1.record.persisted",
+      "assertion.EXPERIMENT-1.claim.released"
+    ]
+  },
+  "wrongType": { "required": "preflight.valid", "supplied": "issue.ready", "result": "rejected" },
+  "wrongSubject": { "issueId": "SUBJECT-1", "assertionSubject": "OTHER-ISSUE", "result": "rejected" },
+  "invalidated": { "assertionId": "assertion.INVALIDATED-1.preflight.valid", "valid": false, "result": "rejected" }
+}

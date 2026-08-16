@@ -1,0 +1,26 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-013.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-013",
+  "candidateId": "agent-project-package.1",
+  "artifactRefs": ["docs/AGENT_PROJECT_PACKAGE.md", "schemas/agent-package-manifest.schema.json", "tools/compile_package.py", "tests/test_package_compiler.py", "examples/agent-package/output/agent-package-manifest.json"],
+  "intentRefs": ["ROADMAP.md#m1-adoption-kit", "work/IEPE-CORE-013.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": {"type": "local deterministic compiler", "language": "Python 3.12", "digest": "SHA-256"},
+  "inputs": ["declared canonical sources", "operating contract", "skills", "adapters", "source state", "exclusions"],
+  "provenance": ["IEPE-CORE-013 package compilation cycle"],
+  "evaluations": [
+    {"dimension": "determinism", "result": "identical input produces byte-identical manifest and corpus", "evaluator": "unittest", "evidenceRefs": ["tests/test_package_compiler.py"]},
+    {"dimension": "source safety", "result": "missing, escaping, cache, bytecode, and duplicate paths are rejected", "evaluator": "unittest and compiler validation", "evidenceRefs": ["tests/test_package_compiler.py", "tools/compile_package.py"]},
+    {"dimension": "release integrity", "result": "release classification requires clean source state", "evaluator": "unittest", "evidenceRefs": ["tests/test_package_compiler.py"]},
+    {"dimension": "authority preservation", "result": "generated artifacts are explicitly non-authoritative projections", "evaluator": "protocol review", "evidenceRefs": ["docs/AGENT_PROJECT_PACKAGE.md"]}
+  ],
+  "baselineComparison": {"before": "project agent files and compiled context had no portable package contract", "after": "a deterministic manifest and compiler bind governance, context, skills, adapters, provenance, and integrity"},
+  "cost": null,
+  "tradeoffs": ["the initial compiler accepts an explicit source list rather than discovering authority automatically"],
+  "limitations": ["no archive writer", "no signature beyond SHA-256 integrity", "no repository-state detector", "no external project package conformance run"],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run python3 tools/compile_package.py --config examples/agent-package/package-source.json --output examples/agent-package/output and python3 tools/validate.py."
+}

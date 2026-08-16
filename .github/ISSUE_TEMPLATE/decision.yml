@@ -1,0 +1,28 @@
+name: IEPE Decision
+description: Resolve a consequential tradeoff with explicit authority.
+title: "[Decision] "
+body:
+  - type: textarea
+    id: question
+    attributes: { label: Decision question and intent }
+    validations: { required: true }
+  - type: textarea
+    id: authority
+    attributes: { label: Decision authority }
+    validations: { required: true }
+  - type: textarea
+    id: candidates
+    attributes: { label: Candidate options }
+    validations: { required: true }
+  - type: textarea
+    id: evidence
+    attributes: { label: Evidence and uncertainty }
+    validations: { required: true }
+  - type: textarea
+    id: tradeoffs
+    attributes: { label: Tradeoffs and affected parties }
+    validations: { required: true }
+  - type: textarea
+    id: consequences
+    attributes: { label: Consequences, reversibility, and follow-up }
+    validations: { required: true }

@@ -1,0 +1,66 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-004.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-004",
+  "candidateId": "example.exhibition-guide",
+  "artifactRefs": [
+    "examples/exhibition-guide/INTENT.md",
+    "examples/exhibition-guide/records/project-profile.json",
+    "examples/exhibition-guide/records/experience-contract.json",
+    "examples/exhibition-guide/records/issue-contract.json",
+    "examples/exhibition-guide/candidates/candidate-a-route-led.md",
+    "examples/exhibition-guide/candidates/candidate-b-choice-led.md",
+    "examples/exhibition-guide/records/evaluation-record.json",
+    "examples/exhibition-guide/negative-results.md",
+    "examples/exhibition-guide/records/evidence-bundle.json",
+    "examples/exhibition-guide/records/promotion-record.json",
+    "examples/exhibition-guide/coordinator-trace.md"
+  ],
+  "intentRefs": ["ROADMAP.md#m1-adoption-kit", "work/IEPE-CORE-004.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": { "type": "synthetic cross-domain pilot", "externalSideEffects": false },
+  "inputs": ["two editorial candidate structures", "one experience contract", "one synthetic baseline"],
+  "provenance": ["IEPE-CORE-004 coordinator cycle"],
+  "evaluations": [
+    {
+      "dimension": "schema conformance",
+      "result": "6 of 6 example records validate",
+      "evaluator": "tools/validate.py",
+      "evidenceRefs": ["examples/exhibition-guide/conformance-manifest.json"]
+    },
+    {
+      "dimension": "editorial constraints",
+      "result": "both candidates remain below 180 words",
+      "evaluator": "word-count audit",
+      "evidenceRefs": ["examples/exhibition-guide/candidates"]
+    },
+    {
+      "dimension": "negative-result retention",
+      "result": "route-led direction retained with contextual rejection rationale",
+      "evaluator": "coordinator record audit",
+      "evidenceRefs": ["examples/exhibition-guide/negative-results.md"]
+    },
+    {
+      "dimension": "human experience",
+      "result": "not observed and not claimed",
+      "evaluator": "evidence-boundary audit",
+      "evidenceRefs": ["examples/exhibition-guide/README.md"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "core schemas and templates had no complete cross-domain example",
+    "after": "one non-software example completes the internal protocol path"
+  },
+  "cost": { "external": 0, "candidateIterations": 2 },
+  "tradeoffs": ["The pilot demonstrates structural portability but supplies no field evidence"],
+  "limitations": [
+    "Synthetic project",
+    "Partially independent rule-based evaluation",
+    "No real visitor observation",
+    "No live project-management provider"
+  ],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run tools/validate.py, audit candidate word counts, and compare the two candidates against the experience contract."
+}

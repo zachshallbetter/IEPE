@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../schemas/promotion-record.schema.json",
+  "id": "promotion.exhibition-guide.1",
+  "subjectRef": "../candidates/candidate-b-choice-led.md",
+  "issueRef": "IEPE-CORE-004-PILOT",
+  "evidenceBundleRef": "evidence-bundle.json",
+  "authority": "authority.example-owner",
+  "decision": "approved",
+  "target": "internal example baseline",
+  "tradeoffs": ["human and layout validation remain unresolved"],
+  "conditions": ["must not be represented as visitor-validated", "requires human observation before external experience claims"],
+  "recoveryPlan": "Restore the title-only baseline or reopen candidate exploration.",
+  "effectiveAt": null
+}

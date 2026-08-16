@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../schemas/unknown-variable-ledger.schema.json",
+  "id": "unknowns.exhibition-guide.1",
+  "projectRef": "project.exhibition-guide",
+  "entries": [
+    {
+      "id": "unknown.exhibition.comprehension",
+      "variable": "whether visitors understand and act on the invitation",
+      "classification": "currently-unknowable",
+      "evidenceRefs": [],
+      "nextProbe": "Observe consenting visitors in the intended environment"
+    },
+    {
+      "id": "unknown.exhibition.format-dependence",
+      "variable": "dependence on typographic hierarchy for rapid scanning",
+      "classification": "discovered-through-perturbation",
+      "evidenceRefs": ["stress/trial-report.md#trial-1-format-loss"],
+      "nextProbe": "Compare plain-text and designed renderings with users"
+    },
+    {
+      "id": "unknown.exhibition.availability-drift",
+      "variable": "frequency and operational handling of unavailable referenced works",
+      "classification": "known-unresolved",
+      "evidenceRefs": ["stress/trial-report.md#trial-2-artwork-unavailable"],
+      "nextProbe": "Define an availability check before each print run"
+    }
+  ]
+}

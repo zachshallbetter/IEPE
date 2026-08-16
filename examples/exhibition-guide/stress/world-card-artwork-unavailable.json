@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../schemas/world-card.schema.json",
+  "id": "world.exhibition.artwork-unavailable",
+  "perturbationRef": "perturbation.exhibition.artwork-unavailable",
+  "premise": "One of the three artworks named by the frozen guide is temporarily removed after printing.",
+  "retained": ["two artworks remain available", "visitor agency", "factual standards"],
+  "changed": ["availability of one named entry point"],
+  "questions": ["Can a visitor still begin without a required route?", "Does the stale option require an authorized correction?"],
+  "evidenceRequired": ["literal candidate inspection", "bounded repair analysis"],
+  "revealState": "revealed",
+  "candidateFreezeRef": "freeze.exhibition.candidate-b.1"
+}

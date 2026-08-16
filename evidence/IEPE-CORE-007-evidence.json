@@ -1,0 +1,47 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-core-007.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-007",
+  "candidateId": "coordinator.typed-assertions.1",
+  "artifactRefs": [
+    "iepe_core/coordinator.py",
+    "tests/test_coordinator.py",
+    "evidence/traces/coordinator-typed-traces.json"
+  ],
+  "intentRefs": ["ROADMAP.md#m2-coordinator-reference", "work/IEPE-CORE-007.md"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": { "type": "local deterministic reference", "language": "Python 3.12" },
+  "inputs": ["valid typed path", "wrong assertion type", "wrong subject", "invalidated assertion"],
+  "provenance": ["IEPE-CORE-007 coordinator cycle"],
+  "evaluations": [
+    {
+      "dimension": "typed gate integrity",
+      "result": "required gate kind, issue subject, and validity are enforced",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_coordinator.py"]
+    },
+    {
+      "dimension": "compatibility",
+      "result": "valid delivery and experiment cycles continue to complete",
+      "evaluator": "unittest",
+      "evidenceRefs": ["evidence/traces/coordinator-typed-traces.json"]
+    },
+    {
+      "dimension": "negative-path coverage",
+      "result": "wrong type, wrong subject, invalid assertion, missing assertion, and invalid transition reject",
+      "evaluator": "unittest",
+      "evidenceRefs": ["tests/test_coordinator.py"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "gate satisfaction depended on caller-supplied strings",
+    "after": "gates require typed, subject-bound, valid assertions with retained identities"
+  },
+  "cost": null,
+  "tradeoffs": ["Assertions remain locally issued and are not cryptographically attested"],
+  "limitations": ["No trust registry", "No cryptographic signature", "No persisted revocation state"],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run python3 tools/validate.py and inspect the ten coordinator test cases."
+}

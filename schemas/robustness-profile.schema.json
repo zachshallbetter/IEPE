@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepe.dev/schema/robustness-profile.schema.json",
+  "title": "IEPE Robustness Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "candidateRef", "knownQualificationRef", "surpriseBudget", "trials", "validityBoundary", "promotionEffect"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "minLength": 1 },
+    "candidateRef": { "type": "string", "minLength": 1 },
+    "knownQualificationRef": { "type": "string", "minLength": 1 },
+    "surpriseBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluationShare", "minimumWorldCards", "candidateVisibility"],
+      "properties": {
+        "evaluationShare": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "minimumWorldCards": { "type": "integer", "minimum": 1 },
+        "candidateVisibility": { "const": "sealed-until-frozen" }
+      }
+    },
+    "trials": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["worldCardRef", "disposition", "evidenceRefs", "limitations"],
+        "properties": {
+          "worldCardRef": { "type": "string" },
+          "disposition": { "enum": ["robust", "adaptable", "bounded", "fragile", "unsafe", "unknown"] },
+          "evidenceRefs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "limitations": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "validityBoundary": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "promotionEffect": { "enum": ["none", "constrain", "revise", "block", "escalate"] }
+  }
+}

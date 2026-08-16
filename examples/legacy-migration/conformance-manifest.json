@@ -1,0 +1,7 @@
+{
+  "../../schemas/migration-record.schema.json": [
+    "records/historical.json",
+    "records/active.json",
+    "records/new.json"
+  ]
+}

@@ -1,0 +1,5 @@
+[
+  { "id": "LEGACY-11", "status": "Closed", "title": "Earlier exploration", "relationships": [] },
+  { "id": "LEGACY-18", "status": "Doing", "title": "Revise the participant guide", "relationships": ["EPIC-3"] },
+  { "id": "NEW-24", "status": "Open", "title": "Evaluate the revised guide", "relationships": ["LEGACY-18"] }
+]

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepe.dev/schema/migration-record.schema.json",
+  "title": "IEPE Migration Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "source", "classification", "disposition", "provenance", "evidenceGaps", "decision"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "itemId", "status"],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1 },
+        "itemId": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "minLength": 1 },
+        "url": { "type": ["string", "null"] }
+      }
+    },
+    "classification": { "enum": ["historical", "active", "new"] },
+    "disposition": { "enum": ["preserve", "reconcile", "require-full-contract", "blocked"] },
+    "targetStatus": { "type": ["string", "null"] },
+    "statusRationale": { "type": ["string", "null"] },
+    "intentRefs": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "relationshipRefs": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "provenance": { "enum": ["complete", "partial", "missing"] },
+    "evidenceGaps": { "type": "array", "items": { "type": "string" } },
+    "decision": { "enum": ["accepted", "needs-review", "rejected"] },
+    "notes": { "type": ["string", "null"] }
+  }
+}

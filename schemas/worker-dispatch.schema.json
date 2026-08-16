@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepe.dev/schema/worker-dispatch.schema.json",
+  "title": "IEPE Worker Dispatch Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "issueId", "claimId", "contextSha256", "workerId", "role", "attempt", "permissions", "status"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "id": {"type": "string", "minLength": 1},
+    "issueId": {"type": "string", "minLength": 1},
+    "claimId": {"type": "string", "minLength": 1},
+    "contextSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "workerId": {"type": "string", "minLength": 1},
+    "role": {"type": "string", "minLength": 1},
+    "attempt": {"type": "integer", "minimum": 1},
+    "permissions": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "status": {"enum": ["active", "completed", "failed", "blocked", "stopped"]},
+    "result": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["artifacts", "observations", "commands", "cost", "limitations"],
+      "properties": {
+        "artifacts": {"type": "array", "items": {"type": "string"}},
+        "observations": {"type": "array", "items": {"type": "string"}},
+        "commands": {"type": "array", "items": {"type": "string"}},
+        "cost": {"type": ["number", "null"], "minimum": 0},
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

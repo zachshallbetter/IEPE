@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../schemas/robustness-profile.schema.json",
+  "id": "robustness.exhibition.candidate-b.1",
+  "candidateRef": "candidates/candidate-b-choice-led.md#frozen-at-evaluation-1",
+  "knownQualificationRef": "records/evaluation-record.json",
+  "surpriseBudget": {
+    "evaluationShare": 0.15,
+    "minimumWorldCards": 2,
+    "candidateVisibility": "sealed-until-frozen"
+  },
+  "trials": [
+    {
+      "worldCardRef": "world.exhibition.format-loss",
+      "disposition": "bounded",
+      "evidenceRefs": ["stress/trial-report.md#trial-1-format-loss"],
+      "limitations": ["synthetic inspection does not establish visitor comprehension"]
+    },
+    {
+      "worldCardRef": "world.exhibition.artwork-unavailable",
+      "disposition": "adaptable",
+      "evidenceRefs": ["stress/trial-report.md#trial-2-artwork-unavailable"],
+      "limitations": ["repair was analyzed but not field tested"]
+    }
+  ],
+  "validityBoundary": ["all named artworks remain available or the guide is corrected", "basic textual grouping is preserved", "human outcomes remain unvalidated"],
+  "promotionEffect": "constrain"
+}

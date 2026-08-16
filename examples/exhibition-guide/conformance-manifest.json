@@ -1,0 +1,18 @@
+{
+  "../../schemas/project-profile.schema.json": "records/project-profile.json",
+  "../../schemas/experience-contract.schema.json": "records/experience-contract.json",
+  "../../schemas/issue-contract.schema.json": "records/issue-contract.json",
+  "../../schemas/evaluation-record.schema.json": "records/evaluation-record.json",
+  "../../schemas/evidence-bundle.schema.json": "records/evidence-bundle.json",
+  "../../schemas/promotion-record.schema.json": "records/promotion-record.json",
+  "../../schemas/perturbation.schema.json": [
+    "stress/perturbation-format-loss.json",
+    "stress/perturbation-artwork-unavailable.json"
+  ],
+  "../../schemas/world-card.schema.json": [
+    "stress/world-card-format-loss.json",
+    "stress/world-card-artwork-unavailable.json"
+  ],
+  "../../schemas/robustness-profile.schema.json": "stress/robustness-profile.json",
+  "../../schemas/unknown-variable-ledger.schema.json": "stress/unknown-variable-ledger.json"
+}

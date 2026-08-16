@@ -1,0 +1,26 @@
+{
+  "delivery": {
+    "issueId": "DELIVERY-1",
+    "finalState": "complete",
+    "states": ["preflight", "reconcile", "select", "validate", "claim", "assemble_context", "dispatch", "observe", "evaluate", "disposition", "record", "close_loop", "complete"]
+  },
+  "experiment": {
+    "issueId": "EXPERIMENT-1",
+    "finalState": "complete",
+    "states": ["preflight", "reconcile", "select", "validate", "claim", "assemble_context", "dispatch", "observe", "evaluate", "disposition", "record", "close_loop", "complete"]
+  },
+  "stopped": {
+    "issueId": "STOP-1",
+    "finalState": "stopped",
+    "stoppedFrom": "preflight",
+    "reason": "owning workspace is ambiguous",
+    "resumeAuthority": "project owner",
+    "evidence": ["workspace.conflict"]
+  },
+  "invalidTransition": {
+    "issueId": "INVALID-1",
+    "source": "preflight",
+    "attemptedTarget": "claim",
+    "result": "rejected"
+  }
+}
