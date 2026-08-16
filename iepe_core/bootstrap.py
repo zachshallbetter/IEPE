@@ -26,7 +26,7 @@ class BootstrapConfig:
     intent: str
     protocol_source: str
     protocol_revision: str
-    protocol_version: str = "0.1.0"
+    protocol_version: str = "0.2.0"
     work_graph_provider: str = "local"
     project_ref: str = "work"
     coordinator_identity: str = "coordinator.local"

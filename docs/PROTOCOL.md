@@ -1,7 +1,7 @@
 # Intent and Evidence Project Engine Protocol
 
 > Protocol: `IEPE-001`  
-> Version: `0.1.0`  
+> Version: `0.2.0`  
 > Status: Draft reference protocol  
 > Scope: Domain-neutral
 

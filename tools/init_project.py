@@ -23,7 +23,7 @@ def parser() -> argparse.ArgumentParser:
     new.add_argument("--intent", required=True)
     new.add_argument("--protocol-source", required=True)
     new.add_argument("--protocol-revision", required=True)
-    new.add_argument("--protocol-version", default="0.1.0")
+    new.add_argument("--protocol-version", default="0.2.0")
     new.add_argument("--work-graph-provider", default="local")
     new.add_argument("--project-ref", default="work")
     new.add_argument("--coordinator-identity", default="coordinator.local")
