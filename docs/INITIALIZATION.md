@@ -266,6 +266,8 @@ The coordinator continues until the milestone qualifies, the budget expires, evi
 
 ## Standard Triggers and Reference Commands
 
+For the full single-file agent cheat-sheet and copy-paste prompt block, see [`REFERENCE.md`](REFERENCE.md).
+
 ### Trigger for an Existing Project (Stage 1: Reconcile)
 
 Start the agent inside the target repository:

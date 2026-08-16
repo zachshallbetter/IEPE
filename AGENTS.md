@@ -10,10 +10,23 @@ Resolve conflicts in this order:
 1. docs/PROTOCOL.md
 2. Approved decision records
 3. JSON schemas
-4. Coordinator and adoption specifications
+4. Coordinator and adoption specifications (docs/COORDINATOR.md, docs/REFERENCE.md)
 5. Issue contracts and acceptance criteria
 6. Implemented code and templates
 7. Generated artifacts and agent output
+```
+
+## Single Agent Reference
+
+For the universal single-file cheat-sheet and adoption protocol, see [`docs/REFERENCE.md`](docs/REFERENCE.md).
+
+```text
+Adopt IEPE for this repository.
+Target: ./
+Pinned IEPE source: https://github.com/zachshallbetter/IEPE (v0.2.0)
+Project Intent: "<Describe the core project intent here>"
+Project Mode: existing | new
+Mutation Authority: local-files
 ```
 
 ## Required operating behavior
