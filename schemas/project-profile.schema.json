@@ -9,6 +9,7 @@
     "$schema": { "type": "string" },
     "id": { "type": "string", "minLength": 1 },
     "name": { "type": "string", "minLength": 1 },
+    "profileStatus": { "enum": ["established", "provisional"] },
     "protocol": {
       "type": "object",
       "additionalProperties": false,

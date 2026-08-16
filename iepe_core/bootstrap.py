@@ -82,10 +82,12 @@ def protocol_reference(config: BootstrapConfig) -> dict:
 
 def project_profile(config: BootstrapConfig) -> dict:
     protocol = protocol_reference(config)
+    is_provisional = "unassigned" in config.promotion_authorities
     return {
         "$schema": "https://iepe.dev/schema/project-profile.schema.json",
         "id": config.project_id,
         "name": config.project_name,
+        "profileStatus": "provisional" if is_provisional else "established",
         "protocol": {key: protocol[key] for key in ("protocolId", "protocolVersion", "source", "revision")},
         "intentRefs": ["INTENT.md"],
         "authorityOrder": ["INTENT.md", "docs/EXPERIENCE.md", "docs/ARCHITECTURE.md", "PROJECT_PROFILE.json", "AGENTS.md"],
@@ -274,8 +276,26 @@ Define after M0. Express the milestone as observable capability and exit evidenc
     return files
 
 
+def probe_workspace_write_capability(root: Path) -> bool:
+    root = root.resolve()
+    if not root.exists():
+        try:
+            root.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            return False
+    probe_file = root / ".iepe-write-probe"
+    try:
+        probe_file.write_text("probe", encoding="utf-8")
+        probe_file.unlink(missing_ok=True)
+        return True
+    except OSError:
+        return False
+
+
 def initialize_new(root: Path, config: BootstrapConfig, *, overwrite: bool = False) -> tuple[Path, ...]:
     root = root.resolve()
+    if not probe_workspace_write_capability(root):
+        raise PermissionError("ENV_WORKSPACE_READ_ONLY: Cannot write to workspace root. Preflight write probe failed.")
     files = generated_files(config)
     conflicts = sorted(relative for relative in files if (root / relative).exists())
     if conflicts and not overwrite:

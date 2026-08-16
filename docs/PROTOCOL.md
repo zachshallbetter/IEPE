@@ -21,6 +21,8 @@ IEPE is a governed process that converts project intent into authorized work, ge
 8. Negative results become project memory.
 9. Metrics may inform intent but may not silently replace it.
 10. Invalid authority, context, ownership, permissions, or evidence is a stop state.
+11. Environmental capability checks must precede discovery and preparation.
+12. Non-retryable blockers must fingerprint, emit once, and enter a parked state (`WAITING_EXTERNAL`) to prevent livelocks.
 
 ## Engine planes
 
@@ -31,6 +33,63 @@ IEPE is a governed process that converts project intent into authorized work, ge
 | Coordination | Work graph, dependencies, claims, budgets, scheduling, dispatch |
 | Execution | Research, design, implementation, testing, and bounded operations |
 | Evaluation and Evidence | Verification, observation, comparison, qualification, lineage |
+
+## Condition classification taxonomy
+
+The coordinator distinguishes unresolved conditions into six explicit types:
+
+| Condition | Meaning | Coordinator Response |
+| --- | --- | --- |
+| `AUTHORIZATION_MISSING` | User has not permitted the action | Ask one precise question |
+| `CAPABILITY_MISSING` | Environment cannot perform the action | Stop once; identify the required capability |
+| `EVIDENCE_MISSING` | Promotion cannot yet be justified | Continue allowed preparation; block only promotion |
+| `INPUT_MISSING` | Consequential project decision is unresolved | Use provisional value or ask if execution materially depends on it |
+| `WORK_UNAVAILABLE` | Nothing actionable is Ready | Park the loop |
+| `EXTERNAL_EVENT_PENDING` | Only another actor can change state | Enter `WAITING_EXTERNAL`; do not retry |
+
+## Authority boundaries and implicit defaults
+
+### Initialization vs. Promotion Authority
+
+Creating local, reversible project-operating files (e.g. `AGENTS.md`, `PROJECT_PROFILE.json`, `.iepe/protocol-reference.json`) requires only local reversible authorization. Unassigned promotion authority yields:
+
+```json
+{
+  "promotionAuthority": "unassigned",
+  "profileStatus": "provisional",
+  "promotionBlocked": true
+}
+```
+
+It must not prevent creation of local operating documentation or initial work contracts.
+
+### Implicit Action Authorization
+
+When a user requests project initialization or local adoption, the implicit authorization defaults are:
+
+- `read_project`: allowed
+- `write_local_iepe_files`: allowed
+- `run_local_validation`: allowed
+- `create_external_work_items`: not_allowed
+- `push_or_merge`: not_allowed
+- `deploy_or_publish`: not_allowed
+- `spend_or_change_credentials`: not_allowed
+
+### Hard-blocker fingerprinting
+
+Every blocker receives a stable fingerprint:
+
+```json
+{
+  "code": "ENV_WORKSPACE_READ_ONLY",
+  "scope": "target-project",
+  "requiredChange": "workspace-write capability",
+  "retryableByAgent": false,
+  "fingerprint": "ENV_WORKSPACE_READ_ONLY:target-project"
+}
+```
+
+If the current blocker fingerprint matches the previous non-retryable blocker, the coordinator MUST NOT retry, reread the objective, or consume additional attempts. It immediately enters `WAITING_EXTERNAL` and returns control to the user.
 
 ## Canonical objects
 

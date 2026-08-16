@@ -1,0 +1,55 @@
+{
+  "$schema": "../schemas/evidence-bundle.schema.json",
+  "id": "evidence.iepe-incident-001.1",
+  "projectId": "IEPE-CORE",
+  "issueId": "IEPE-CORE-016",
+  "candidateId": "livelock-prevention-v1",
+  "artifactRefs": [
+    "docs/PROTOCOL.md",
+    "docs/COORDINATOR.md",
+    "docs/INITIALIZATION.md",
+    "docs/NEGATIVE_RESULTS.md",
+    "iepe_core/coordinator.py",
+    "iepe_core/bootstrap.py",
+    "schemas/project-profile.schema.json"
+  ],
+  "intentRefs": ["docs/PROTOCOL.md#constitutional-invariants"],
+  "authorityRefs": ["docs/PROTOCOL.md", "AGENTS.md"],
+  "environment": {
+    "executionClass": "incident analysis and protocol synthesis"
+  },
+  "inputs": ["SES project initialization governance livelock transcript"],
+  "provenance": ["SES project adoption trial"],
+  "evaluations": [
+    {
+      "dimension": "livelock prevention",
+      "result": "fingerprinted non-retryable blockers halt retries and transition to WAITING_EXTERNAL",
+      "evaluator": "Coordinator reference state machine",
+      "evidenceRefs": ["tests/test_coordinator.py"]
+    },
+    {
+      "dimension": "preflight capability probing",
+      "result": "workspace write probe detects CAPABILITY_MISSING before discovery or overlay construction",
+      "evaluator": "Bootstrap preflight probe",
+      "evidenceRefs": ["tests/test_bootstrap.py"]
+    },
+    {
+      "dimension": "provisional profile generation",
+      "result": "unassigned promotion authority yields profileStatus provisional without blocking initialization",
+      "evaluator": "Bootstrap project profile generator",
+      "evidenceRefs": ["tests/test_bootstrap.py"]
+    }
+  ],
+  "baselineComparison": {
+    "before": "livelock retries, capability checked late, promotion authority coupled to local setup",
+    "after": "preflight capability probing, WAITING_EXTERNAL state, provisional profile support"
+  },
+  "cost": null,
+  "tradeoffs": ["Preflight write probe creates transient file in workspace"],
+  "limitations": [
+    "Requires write access probe file cleanup"
+  ],
+  "qualification": "tested",
+  "promotionRecommendation": "promote",
+  "reproduction": "Run python3 -m pytest -v to execute test_coordinator.py and test_bootstrap.py livelock prevention tests."
+}

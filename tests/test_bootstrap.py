@@ -56,6 +56,27 @@ class BootstrapTests(unittest.TestCase):
             self.assertEqual(manifest["protocol"]["protocolId"], "IEPE-001")
             self.assertEqual(manifest["protocol"]["revision"], "v0.1.0-test")
 
+    def test_provisional_profile_when_promotion_unassigned(self):
+        cfg = BootstrapConfig(
+            project_id="project.provisional",
+            project_name="Project Provisional",
+            intent="Intent text for provisional project.",
+            protocol_source="https://example.test/iepe-core",
+            protocol_revision="v0.1.0-test",
+            evaluators=("content.correctness",),
+            promotion_authorities=("unassigned",),
+        )
+        files = generated_files(cfg)
+        profile = json.loads(files["PROJECT_PROFILE.json"])
+        self.assertEqual(profile["profileStatus"], "provisional")
+        self.assertEqual(profile["promotionAuthorities"], ["unassigned"])
+
+    def test_write_capability_probe(self):
+        from iepe_core.bootstrap import probe_workspace_write_capability
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.assertTrue(probe_workspace_write_capability(root))
+
 
 if __name__ == "__main__":
     unittest.main()

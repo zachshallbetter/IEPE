@@ -207,13 +207,36 @@ Domain profiles may extend evaluation and adapters. They may not silently replac
 Initialization completes only when:
 
 1. Intent and authority are explicit enough to govern the pilot.
-2. The project profile conforms to the declared schema.
+2. The project profile conforms to the declared schema (or declares `"profileStatus": "provisional"` if promotion authority is unassigned).
 3. The baseline records known failures and evidence gaps.
 4. Work-graph relationships required by the pilot are reconciled.
 5. Evaluators and evidence maturity are declared.
-6. Protected actions and promotion authorities are named.
+6. Protected actions and promotion authorities are named (or declared `"unassigned"` for provisional local initialization).
 7. The unknown-variable ledger contains material assumptions.
 8. A bounded, reversible issue is Ready.
+
+### Preflight Workspace Capability Probe
+
+Before performing discovery or constructing an overlay, the initializer MUST run a single workspace write probe:
+
+1. Test write capability by writing a temporary probe file (e.g. `.iepe-write-test`) inside the authorized workspace.
+2. Remove or quarantine the probe immediately.
+3. If writes succeed, proceed to discovery and overlay generation.
+4. If writes fail (`CAPABILITY_MISSING`), stop ONCE with `ENV_WORKSPACE_READ_ONLY`, do not prepare full overlays, do not retry, and enter `WAITING_EXTERNAL`.
+
+### Provisional Profiles & Promotion Decoupling
+
+Local initialization requires only local reversible action authorization. An unassigned promotion authority generates a provisional profile:
+
+```json
+{
+  "promotionAuthority": "unassigned",
+  "profileStatus": "provisional",
+  "promotionBlocked": true
+}
+```
+
+This permits creation of `AGENTS.md`, `PROJECT_PROFILE.json`, and `.iepe/protocol-reference.json` while blocking milestone promotion until a named authority is assigned.
 
 ### Compile the Agent Project Package
 

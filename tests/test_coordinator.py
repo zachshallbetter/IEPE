@@ -67,6 +67,36 @@ class CoordinatorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "terminal"):
             coordinator.receipt()
 
+    def test_waiting_external_state(self) -> None:
+        from iepe_core.coordinator import BlockerFingerprint, ConditionType
+        coordinator = Coordinator("WAIT-1", "delivery")
+        blocker = BlockerFingerprint(
+            code="ENV_WORKSPACE_READ_ONLY",
+            scope="SES",
+            required_change="workspace-write capability",
+            retryable_by_agent=False,
+            condition_type=ConditionType.CAPABILITY_MISSING,
+        )
+        coordinator.park_waiting_external(blocker, resume_authority="user")
+        receipt = coordinator.receipt()
+        self.assertEqual(receipt.final_state, CoordinatorState.WAITING_EXTERNAL)
+        self.assertIn("ENV_WORKSPACE_READ_ONLY", receipt.stop.reason)
+        self.assertEqual(receipt.stop.resume_authority, "user")
+
+    def test_duplicate_non_retryable_blocker_fails(self) -> None:
+        from iepe_core.coordinator import BlockerFingerprint, ConditionType
+        coordinator = Coordinator("WAIT-2", "delivery")
+        blocker = BlockerFingerprint(
+            code="ENV_WORKSPACE_READ_ONLY",
+            scope="SES",
+            required_change="workspace-write capability",
+            retryable_by_agent=False,
+            condition_type=ConditionType.CAPABILITY_MISSING,
+        )
+        coordinator.park_waiting_external(blocker, resume_authority="user")
+        with self.assertRaisesRegex(ValueError, "Duplicate non-retryable blocker fingerprint"):
+            coordinator.park_waiting_external(blocker, resume_authority="user")
+
 
 if __name__ == "__main__":
     unittest.main()

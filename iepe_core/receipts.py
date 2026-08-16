@@ -154,10 +154,10 @@ def validate_replay(payload: dict[str, Any]) -> None:
     final_state = CoordinatorState(payload.get("finalState"))
     if expected_source is not final_state:
         raise ValueError("Receipt final state does not match transition history")
-    if final_state not in {CoordinatorState.COMPLETE, CoordinatorState.STOPPED}:
+    if final_state not in {CoordinatorState.COMPLETE, CoordinatorState.STOPPED, CoordinatorState.WAITING_EXTERNAL}:
         raise ValueError("Receipt final state is not terminal")
     stop = payload.get("stop")
-    if final_state is CoordinatorState.STOPPED:
+    if final_state in {CoordinatorState.STOPPED, CoordinatorState.WAITING_EXTERNAL}:
         if not isinstance(stop, dict) or not stop.get("reason") or not stop.get("resumeAuthority"):
             raise ValueError("Stopped receipt is missing its stop record")
     elif stop is not None:

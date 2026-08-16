@@ -7,7 +7,7 @@ The coordinator is a persistent project-management agent. It connects authority,
 ## State machine
 
 ```text
-PREFLIGHT
+PREFLIGHT (Capabilities & Environment Probe)
   -> RECONCILE
   -> SELECT
   -> VALIDATE
@@ -19,15 +19,36 @@ PREFLIGHT
   -> DISPOSITION
   -> RECORD
   -> CLOSE_LOOP
+  -> WAITING_EXTERNAL (Parked on Non-Retryable Blocker)
 ```
 
-Any state may transition to `STOPPED` when a declared stop condition occurs.
+Any state may transition to `STOPPED` when an unrecoverable stop condition occurs, or `WAITING_EXTERNAL` when an external capability or authorization condition is pending.
 
-## State requirements
+## Preflight Execution Sequence
+
+Environment capabilities must be tested **before** discovery or preparation:
+
+```text
+resolve project
+  -> inspect instructions
+  -> test required capabilities (e.g. write-probe)
+  -> perform discovery
+  -> prepare changes
+  -> mutate
+```
 
 ### Preflight
 
-Verify providers, credentials, tools, repository or workspace identity, project identity, context version, capacity, and resource limits.
+Verify environment capabilities (e.g. testing workspace write capability using a temporary probe file before constructing overlays), providers, credentials, tools, repository identity, project identity, context version, capacity, and resource limits. If required environment capabilities are missing (e.g. `CAPABILITY_MISSING`), emit a single `ENV_WORKSPACE_READ_ONLY` blocker and transition to `WAITING_EXTERNAL` without preparing mutations or retrying.
+
+### Blocker Deduplication Rule
+
+If the current blocker fingerprint (`code:scope`) matches a previous non-retryable blocker:
+- Do not retry
+- Do not reread the objective
+- Do not consume attempts
+- Enter `WAITING_EXTERNAL`
+- Return control to user
 
 ### Reconcile
 
