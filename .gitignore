@@ -22,3 +22,4 @@ htmlcov/
 !.agents/
 !**/AGENTS.md
 !**/.agents/
+llms*.txt
